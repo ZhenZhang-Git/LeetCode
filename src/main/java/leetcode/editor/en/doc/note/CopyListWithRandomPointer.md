@@ -1,0 +1,1 @@
+HashMap which holds old nodes as keys and new nodes as its values. 

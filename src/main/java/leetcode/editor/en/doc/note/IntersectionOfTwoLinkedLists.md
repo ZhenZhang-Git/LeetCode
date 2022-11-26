@@ -1,0 +1,1 @@
+it's not the val is equal,it's the pointer is equal

@@ -1,0 +1,25 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        int left = 0,right=nums.length-1;
+        while(left<right){
+            int mid = (left+right)/2;
+            if (nums[mid]== target)
+                return mid;
+            else if (nums[mid]<target){
+                left = mid;
+            }
+            else
+                right = mid;
+        }
+        return -1;
+    }
+}
+//runtime:N/A
+//memory:N/A
+//total_testcases:47
+//total_correct:1
+//input_formatted:"[-1,0,3,5,9,12],2"
+//expected_output:-1
+//code_output:
+//runtime_error:null
+//last_testcase:[-1,0,3,5,9,12] 2

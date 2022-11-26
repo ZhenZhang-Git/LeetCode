@@ -1,0 +1,59 @@
+
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     * int val;
+     * ListNode next;
+     * ListNode(int x) {
+     * val = x;
+     * next = null;
+     * }
+     * }
+     */
+    public class Solution {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode pA = headA, pB = headB;
+            int lenA = 0, lenB = 0, lenDiff = 0;
+
+            while (pA != null) {
+                pA = pA.next;
+                lenA++;
+            }
+            while (pB != null) {
+                pB = pB.next;
+                lenB++;
+            }
+
+            lenDiff = lenA >= lenB ? lenA - lenB : lenB - lenA;
+            pA = headA;
+            pB = headB;
+
+            if (lenA >= lenB) {
+                while (lenDiff > 0) {
+                    pA = pA.next;
+                    lenDiff--;
+                }
+            } else {
+                while (lenDiff > 0) {
+                    pB = pB.next;
+                    lenDiff--;
+                }
+            }
+
+            while (pA != null && pB != null) {
+                if (pA.val == pB.val) {
+                    return pA;
+                }
+                pA= pA.next;
+                pB= pB.next;
+            }
+
+            return null;
+        }
+    }
+
+//total_testcases:39
+//total_correct:37
+//input_formatted:"8,[4,1,8,4,5],[5,6,1,8,4,5],2,3"
+//expected_output:Intersected at '8'
+//code_output:Intersected at '1'

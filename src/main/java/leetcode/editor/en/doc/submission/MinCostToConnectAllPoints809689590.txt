@@ -1,0 +1,86 @@
+    class Solution {
+        public int minCostConnectPoints(int[][] points) {
+            int n = points.length;
+
+            List<int[]>[] graph = buildGraph(n, points);
+            return new Prim(graph).weightSum();
+        }
+
+        List<int[]>[] buildGraph(int n, int[][] points) {
+            List<int[]>[] graph = new LinkedList[n];
+            for (int i = 0; i < n; i++) {
+                graph[i] = new LinkedList<>();
+            }
+
+            for (int i = 0; i < n; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    int xi = points[i][0], yi = points[i][1];
+                    int xj = points[j][0], yj = points[j][1];
+                    int weight = Math.abs(xi - xj) + Math.abs(yi - yj);
+
+                    graph[i].add(new int[]{i, j, weight});
+                    graph[j].add(new int[]{i, j, weight});
+                }
+            }
+
+            return graph;
+        }
+
+        class Prim {
+            private PriorityQueue<int[]> priorityQueue;
+            private boolean[] inMST;
+            private int weightSum = 0;
+            private List<int[]>[] graph;
+
+            public Prim(List<int[]>[] graph) {
+                this.graph = graph;
+                this.priorityQueue = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
+                int n = graph.length;
+                this.inMST = new boolean[n];
+
+                inMST[0] = true;
+                cut(0);
+
+                while (!priorityQueue.isEmpty()) {
+                    int[] edge = priorityQueue.poll();
+                    int to = edge[1];
+                    int weight = edge[2];
+                    if (inMST[to]) {
+                        continue;
+                    }
+                    weightSum += weight;
+                    inMST[to] = true;
+                    cut(to);
+                }
+            }
+
+            private void cut(int s) {
+                for (int[] edge : graph[s]) {
+                    int to = edge[1];
+                    if (inMST[to]) {
+                        continue;
+                    }
+                    priorityQueue.offer(edge);
+                }
+            }
+
+            public int weightSum() {
+                return weightSum;
+            }
+
+            public boolean allConnected() {
+                for (int i = 0; i < inMST.length; i++) {
+                    if (!inMST[i]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+    }
+
+//total_testcases:72
+//total_correct:5
+//input_formatted:"[[0,0],[1,1],[1,0],[-1,1]]"
+//expected_output:4
+//code_output:5

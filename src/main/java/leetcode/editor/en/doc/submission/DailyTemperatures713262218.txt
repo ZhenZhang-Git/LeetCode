@@ -1,0 +1,19 @@
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int[] answer = new int[temperatures.length];
+        int count = 0;
+        for(int i=0;i<temperatures.length;i++){
+            count = 0;
+            for(int j =i+1;j<temperatures.length;j++){
+                if(temperatures[j]>temperatures[i]){
+                    count = j-i;
+                    break;
+                }
+            }
+            answer[i]=count;
+        }
+        return answer;
+    }
+}
+//runtime:2256 ms
+//memory:119.2 MB

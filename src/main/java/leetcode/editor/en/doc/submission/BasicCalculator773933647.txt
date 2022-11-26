@@ -1,0 +1,47 @@
+    class Solution {
+        public int calculate(String s) {
+            Stack<Character> operator = new Stack<>();
+            Stack<Integer> digit = new Stack<>();
+
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if (c == ' ') {
+                    continue;
+                } else if (c == '(' || c == '+' || c == '-') {
+                    operator.push(c);
+                } else if (c >= '0' && c <= '9') {
+                    digit.push((int) c - (int) '0');
+                }
+                if (c == ')' || i == s.length() - 1) {
+                    while (!operator.isEmpty()) {
+                        char op = operator.pop();
+
+                        int b = digit.pop();
+                        int a;
+                        if (!digit.isEmpty()) {
+                            a = digit.pop();
+                        } else {
+                            a = 0;
+                        }
+                        if (op == '+') {
+                            digit.push(a + b);
+                        } else if (op == '-') {
+                            digit.push(a - b);
+                        } else if (op == '(') {
+                            if (a != 0) {
+                                digit.push(a);
+                            }
+                            digit.push(b);
+                        }
+                    }
+                }
+            }
+            return digit.pop();
+        }
+    }
+
+//total_testcases:42
+//total_correct:23
+//input_formatted:"\" 2-1 + 2 \""
+//expected_output:3
+//code_output:2

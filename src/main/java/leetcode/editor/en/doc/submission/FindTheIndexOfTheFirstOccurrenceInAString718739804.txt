@@ -1,0 +1,17 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int i=0;
+        while(true) {
+            int j=0;
+            while(true) {
+                if (j == needle.length()) return i;
+                if (i + j == haystack.length()) return -1;
+                if (needle.charAt(j) != haystack.charAt(i + j)) break;
+                j++;
+            }
+            i++;
+        }
+    }
+}
+//runtime:1 ms
+//memory:42.3 MB

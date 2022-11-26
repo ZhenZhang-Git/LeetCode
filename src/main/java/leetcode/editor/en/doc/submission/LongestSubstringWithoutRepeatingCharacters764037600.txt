@@ -1,0 +1,24 @@
+    class Solution {
+        public int lengthOfLongestSubstring(String s) {
+            int maxLength = 0;
+            int length = 0;
+            for (int i = 0; i < s.length(); i++) {
+                length = 1;
+                for (int j = i; j < s.length() - 1; j++) {
+                    String s1 = String.valueOf(s.charAt(j + 1));
+                    if ("".equals(s1)) {
+                        return maxLength;
+                    }
+                    if (s.substring(i, j + 1).contains(s1)) {
+                        break;
+                    }
+                    length++;
+                }
+                maxLength = Math.max(maxLength, length);
+            }
+            return maxLength;
+        }
+    }
+
+//runtime:689 ms
+//memory:163.8 MB

@@ -1,0 +1,40 @@
+    class Solution {
+        private boolean bipartite = true;
+        private boolean[] color;
+        private boolean[] visited;
+
+        public boolean isBipartite(int[][] graph) {
+            int n = graph.length;
+            color = new boolean[n];
+            visited = new boolean[n];
+
+            for (int v = 0; v < n; v++) {
+                if (!visited[v]) {
+                    traverse(graph, v);
+                }
+            }
+
+            return bipartite;
+        }
+
+        private void traverse(int[][] graph, int v) {
+            if (!bipartite) {
+                return;
+            }
+
+            visited[v] = true;
+            for (int w : graph[v]) {
+                if (!visited[w]) {
+                    color[w] = !color[v];
+                    traverse(graph, w);
+                } else {
+                    if (color[w] == color[v]) {
+                        bipartite = false;
+                    }
+                }
+            }
+        }
+    }
+
+//runtime:1 ms
+//memory:53.4 MB
