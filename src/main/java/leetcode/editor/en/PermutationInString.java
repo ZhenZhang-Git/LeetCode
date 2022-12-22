@@ -54,10 +54,9 @@ public class PermutationInString {
 
             while (right < s2.length()) {
                 char charRight = s2.charAt(right++);
+                window.put(charRight, window.getOrDefault(charRight, 0) + 1);
 
                 if (need.containsKey(charRight)) {
-                    window.put(charRight, window.getOrDefault(charRight, 0) + 1);
-
                     if (need.get(charRight).equals(window.get(charRight))) {
                         valid++;
                     }
@@ -74,8 +73,8 @@ public class PermutationInString {
                         if (need.get(charLeft).equals(window.get(charLeft))) {
                             valid--;
                         }
-                        window.put(charLeft, window.get(charLeft) - 1);
                     }
+                    window.put(charLeft, window.get(charLeft) - 1);
                 }
             }
 
