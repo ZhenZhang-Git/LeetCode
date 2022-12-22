@@ -41,6 +41,7 @@ package leetcode.editor.en;
 // Related Topics Hash Table String Sliding Window 👍 27082 👎 1172
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LongestSubstringWithoutRepeatingCharacters {
     public static void main(String[] args) {
@@ -51,15 +52,18 @@ public class LongestSubstringWithoutRepeatingCharacters {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int lengthOfLongestSubstring(String s) {
-            int res = 0;
-            HashMap<Character, Integer> map = new HashMap<>();
+            Map<Character, Integer> window = new HashMap<>();
 
-            for (int j = 0, i = 0; j < s.length(); j++) {
-                if (map.containsKey(s.charAt(j))) {
-                    i = Math.max(map.get(s.charAt(j)) + 1, i);
+            int left = 0, right = 0, res = 0;
+            while (right < s.length()) {
+                char charRight = s.charAt(right++);
+                window.put(charRight, window.getOrDefault(charRight, 0) + 1);
+
+                while (window.get(charRight) > 1) {
+                    char charLeft = s.charAt(left++);
+                    window.put(charLeft, window.get(charLeft) - 1);
                 }
-                map.put(s.charAt(j), j);
-                res = Math.max(res, j - i + 1);
+                res = Math.max(res, right - left);
             }
             return res;
         }
