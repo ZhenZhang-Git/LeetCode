@@ -63,15 +63,14 @@ public class FindAllAnagramsInAString {
 
             while (right < s.length()) {
                 char charRight = s.charAt(right++);
-
+                window.put(charRight, window.getOrDefault(charRight, 0) + 1);
                 if (need.containsKey(charRight)) {
-                    window.put(charRight, window.getOrDefault(charRight, 0) + 1);
                     if (need.get(charRight).equals(window.get(charRight))) {
                         valid++;
                     }
                 }
 
-                while (right - left == p.length()) {
+                while (right - left >= p.length()) {
                     if (valid == need.size()) {
                         result.add(left);
                     }
@@ -82,9 +81,8 @@ public class FindAllAnagramsInAString {
                         if (need.get(charLeft).equals(window.get(charLeft))) {
                             valid--;
                         }
-
-                        window.put(charLeft, window.get(charLeft) - 1);
                     }
+                    window.put(charLeft, window.get(charLeft) - 1);
                 }
             }
 
