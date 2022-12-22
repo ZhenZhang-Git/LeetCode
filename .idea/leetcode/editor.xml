@@ -102,6 +102,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/BestTimeToBuyAndSellStockWithCooldown.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/doc/content/BestTimeToBuyAndSellStockWithCooldown.md" />
+              <option name="frontendQuestionId" value="leetcode.com309" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/BestTimeToBuyAndSellStockWithCooldown.java" />
+              <option name="titleSlug" value="best-time-to-buy-and-sell-stock-with-cooldown" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/BinarySearch.java">
           <value>
             <LeetcodeEditor>
