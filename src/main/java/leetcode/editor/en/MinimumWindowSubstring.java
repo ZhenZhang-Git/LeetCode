@@ -79,10 +79,9 @@ public class MinimumWindowSubstring {
 
             while (right < s.length()) {
                 char charRight = s.charAt(right++);
+                window.put(charRight, window.getOrDefault(charRight, 0) + 1);
 
                 if (need.containsKey(charRight)) {
-                    window.put(charRight, window.getOrDefault(charRight, 0) + 1);
-
                     if (need.get(charRight).equals(window.get(charRight))) {
                         count++;
                     }
@@ -100,8 +99,9 @@ public class MinimumWindowSubstring {
                         if (need.get(charLeft).equals(window.get(charLeft))) {
                             count--;
                         }
-                        window.put(charLeft, window.get(charLeft) - 1);
                     }
+
+                    window.put(charLeft, window.get(charLeft) - 1);
                 }
             }
 
