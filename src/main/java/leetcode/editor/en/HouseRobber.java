@@ -47,11 +47,14 @@ public class HouseRobber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int rob(int[] nums) {
-            int[] dp = new int[nums.length + 2];
+            int dp_i_1 = 0, dp_i_2 = 0;
+            int dp_i = 0;
             for (int i = nums.length - 1; i >= 0; i--) {
-                dp[i] = Math.max(dp[i + 1], nums[i] + dp[i + 2]);
+                dp_i = Math.max(dp_i_1, nums[i] + dp_i_2);
+                dp_i_2 = dp_i_1;
+                dp_i_1 = dp_i;
             }
-            return dp[0];
+            return dp_i;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
