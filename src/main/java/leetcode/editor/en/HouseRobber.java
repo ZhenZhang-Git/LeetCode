@@ -39,8 +39,6 @@ package leetcode.editor.en;
 //
 // Related Topics Array Dynamic Programming 👍 16351 👎 321
 
-import java.util.Arrays;
-
 public class HouseRobber {
     public static void main(String[] args) {
         Solution solution = new HouseRobber().new Solution();
@@ -48,25 +46,12 @@ public class HouseRobber {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        private int[] memo;
-
         public int rob(int[] nums) {
-            memo = new int[nums.length];
-            Arrays.fill(memo, -1);
-            return dp(nums, 0);
-        }
-
-        private int dp(int[] nums, int i) {
-            if (i >= nums.length) {
-                return 0;
+            int[] dp = new int[nums.length + 2];
+            for (int i = nums.length - 1; i >= 0; i--) {
+                dp[i] = Math.max(dp[i + 1], nums[i] + dp[i + 2]);
             }
-            if (memo[i] != -1) {
-                return memo[i];
-            }
-            int res = Integer.MIN_VALUE;
-            res = Math.max(dp(nums, i + 1), nums[i] + dp(nums, i + 2));
-            memo[i] = res;
-            return res;
+            return dp[0];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
