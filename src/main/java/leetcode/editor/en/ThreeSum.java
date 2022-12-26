@@ -92,7 +92,7 @@ public class ThreeSum {
                         while (left < right && nums[left] == leftNum) {
                             left++;
                         }
-                    } else if (sum > target) {
+                    } else {
                         while (left < right && nums[right] == rightNum) {
                             right--;
                         }
