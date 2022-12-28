@@ -1,0 +1,1 @@
+preSum[i][j] record the sum in matrix[0][0]~matrix[i-1][j-1],means preSum start with 1

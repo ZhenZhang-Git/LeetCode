@@ -63,9 +63,10 @@ public class CorporateFlightBookings {
             int[] diff = new int[n];
             int[] answer = new int[n];
 
+            /*//redundant
             for (int i = 1; i < n - 1; i++) {
                 diff[i] = diff[i] - diff[i - 1];
-            }
+            }*/
 
             for (int[] booking : bookings) {
                 int i = booking[0] - 1;
