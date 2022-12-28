@@ -33,6 +33,7 @@ package leetcode.editor.en;
 // Related Topics Hash Table Two Pointers String Sliding Window 👍 7003 👎 227
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class PermutationInString {
     public static void main(String[] args) {
@@ -56,10 +57,8 @@ public class PermutationInString {
                 char charRight = s2.charAt(right++);
                 window.put(charRight, window.getOrDefault(charRight, 0) + 1);
 
-                if (need.containsKey(charRight)) {
-                    if (need.get(charRight).equals(window.get(charRight))) {
-                        valid++;
-                    }
+                if (Objects.equals(need.get(charRight), window.get(charRight))) {
+                    valid++;
                 }
 
                 while (right - left >= s1.length()) {
@@ -69,11 +68,10 @@ public class PermutationInString {
 
                     char charLeft = s2.charAt(left++);
 
-                    if (need.containsKey(charLeft)) {
-                        if (need.get(charLeft).equals(window.get(charLeft))) {
-                            valid--;
-                        }
+                    if (Objects.equals(need.get(charLeft), window.get(charLeft))) {
+                        valid--;
                     }
+
                     window.put(charLeft, window.get(charLeft) - 1);
                 }
             }

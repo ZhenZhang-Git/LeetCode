@@ -1,0 +1,45 @@
+    class Solution {
+        public String minWindow(String s, String t) {
+            HashMap<Character, Integer> window = new HashMap<>();
+            HashMap<Character, Integer> need = new HashMap<>();
+
+            for (int i = 0; i < t.length(); i++) {
+                need.put(t.charAt(i), need.getOrDefault(t.charAt(i), 0) + 1);
+            }
+
+            int left = 0, right = 0, count = 0, start = 0, len = Integer.MAX_VALUE;
+
+            while (right < s.length()) {
+                char charRight = s.charAt(right++);
+
+                if (need.containsKey(charRight)) {
+                    window.put(charRight, window.getOrDefault(charRight, 0) + 1);
+
+                    if (need.get(charRight).equals(window.get(charRight))) {
+                        count++;
+                    }
+                }
+
+                while (count == need.size()) {
+                    if (right - left < len) {
+                        start = left;
+                        len = right - left;
+                    }
+
+                    char charLeft = s.charAt(left++);
+
+                    if (need.containsKey(charLeft)) {
+                        if (need.get(charLeft).equals(window.get(charLeft))) {
+                            count--;
+                        }
+                        window.put(charLeft, window.get(charLeft) - 1);
+                    }
+                }
+            }
+
+            return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
+        }
+    }
+
+//runtime:19 ms
+//memory:47 MB
