@@ -41,11 +41,12 @@ package leetcode.editor.en;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class FindAllAnagramsInAString {
     public static void main(String[] args) {
         Solution solution = new FindAllAnagramsInAString().new Solution();
-        solution.findAnagrams("cbaebabacd","abc");
+        solution.findAnagrams("cbaebabacd", "abc");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -64,23 +65,19 @@ public class FindAllAnagramsInAString {
             while (right < s.length()) {
                 char charRight = s.charAt(right++);
                 window.put(charRight, window.getOrDefault(charRight, 0) + 1);
-                if (need.containsKey(charRight)) {
-                    if (need.get(charRight).equals(window.get(charRight))) {
-                        valid++;
-                    }
+                if (Objects.equals(need.get(charRight), window.get(charRight))) {
+                    valid++;
                 }
 
-                while (right - left >= p.length()) {
+                while (right - left == p.length()) {
                     if (valid == need.size()) {
                         result.add(left);
                     }
 
                     char charLeft = s.charAt(left++);
 
-                    if (need.containsKey(charLeft)) {
-                        if (need.get(charLeft).equals(window.get(charLeft))) {
-                            valid--;
-                        }
+                    if (Objects.equals(need.get(charLeft), window.get(charLeft))) {
+                        valid--;
                     }
                     window.put(charLeft, window.get(charLeft) - 1);
                 }
