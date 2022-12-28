@@ -25,18 +25,22 @@ package leetcode.editor.en;
 //
 // Related Topics Two Pointers String 👍 5917 👎 989
 
-public class ReverseString{
+public class ReverseString {
     public static void main(String[] args) {
         Solution solution = new ReverseString().new Solution();
-        
+
     }
- 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public void reverseString(char[] s) {
-        
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public void reverseString(char[] s) {
+            for (int i = 0, j = s.length - 1; i < j; i++, j--) {
+                char temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+            }
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
