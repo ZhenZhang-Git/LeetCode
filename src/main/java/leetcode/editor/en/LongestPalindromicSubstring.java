@@ -28,10 +28,6 @@ package leetcode.editor.en;
 //
 // Related Topics String Dynamic Programming 👍 20356 👎 1169
 
-import java.util.Queue;
-import java.util.Stack;
-import java.util.concurrent.LinkedBlockingQueue;
-
 public class LongestPalindromicSubstring {
     public static void main(String[] args) {
         Solution solution = new LongestPalindromicSubstring().new Solution();
@@ -45,26 +41,22 @@ public class LongestPalindromicSubstring {
                 return "";
             }
 
-            int start = 0, end = 0;
+            String res = "";
             for (int i = 0; i < s.length(); i++) {
-                int len1 = expandAroundCenter(s, i, i);
-                int len2 = expandAroundCenter(s, i, i + 1);
-                int len = Math.max(len1, len2);
-                if (len > end - start) {
-                    start = i - (len - 1) / 2;
-                    end = i + len / 2;
-                }
+                String s1 = expandAroundCenter(s, i, i);
+                String s2 = expandAroundCenter(s, i, i + 1);
+                res = res.length() > s1.length() ? res : s1;
+                res = res.length() > s2.length() ? res : s2;
             }
-            return s.substring(start, end + 1);
+            return res;
         }
 
-        private int expandAroundCenter(String s, int left, int right) {
-            int l = left, r = right;
-            while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
-                l--;
-                r++;
+        private String expandAroundCenter(String s, int left, int right) {
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
             }
-            return r - l - 1;
+            return s.substring(left + 1, right);
         }
     }
 
