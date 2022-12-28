@@ -68,24 +68,37 @@ public class PalindromeLinkedList {
      * }
      */
     class Solution {
-        ListNode frontPointer;
-
         public boolean isPalindrome(ListNode head) {
-            frontPointer = head;
-            return recursivelyCheck(head);
-        }
-
-        private boolean recursivelyCheck(ListNode currentNode) {
-            if (currentNode != null) {
-                if (!recursivelyCheck(currentNode.next)) {
+            ListNode slow = head, fast = head;
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            if (fast != null) {
+                slow = slow.next;
+            }
+            ListNode left = head;
+            ListNode right = reverse(slow);
+            while (right != null) {
+                if (left.val != right.val) {
                     return false;
                 }
-                if (currentNode.val != frontPointer.val) {
-                    return false;
-                }
-                frontPointer = frontPointer.next;
+                left = left.next;
+                right = right.next;
             }
             return true;
+        }
+
+        private ListNode reverse(ListNode head) {
+            ListNode dummy = new ListNode(-1);
+            ListNode p = head;
+            while (p != null) {
+                ListNode temp = p.next;
+                p.next = dummy.next;
+                dummy.next = p;
+                p = temp;
+            }
+            return dummy.next;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
