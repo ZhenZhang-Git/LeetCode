@@ -51,13 +51,8 @@ package leetcode.editor.en;
 //
 // Related Topics Hash Table String Sliding Window 👍 11998 👎 564
 
-import com.sun.xml.internal.ws.util.StringUtils;
-import sun.security.util.ArrayUtil;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.Objects;
 
 public class MinimumWindowSubstring {
     public static void main(String[] args) {
@@ -81,10 +76,8 @@ public class MinimumWindowSubstring {
                 char charRight = s.charAt(right++);
                 window.put(charRight, window.getOrDefault(charRight, 0) + 1);
 
-                if (need.containsKey(charRight)) {
-                    if (need.get(charRight).equals(window.get(charRight))) {
-                        count++;
-                    }
+                if (Objects.equals(need.get(charRight), window.get(charRight))) {
+                    count++;
                 }
 
                 while (count == need.size()) {
@@ -95,10 +88,8 @@ public class MinimumWindowSubstring {
 
                     char charLeft = s.charAt(left++);
 
-                    if (need.containsKey(charLeft)) {
-                        if (need.get(charLeft).equals(window.get(charLeft))) {
-                            count--;
-                        }
+                    if (Objects.equals(need.get(charLeft), window.get(charLeft))) {
+                        count--;
                     }
 
                     window.put(charLeft, window.get(charLeft) - 1);
