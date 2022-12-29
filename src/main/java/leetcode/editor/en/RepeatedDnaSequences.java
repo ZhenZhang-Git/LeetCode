@@ -34,9 +34,8 @@ package leetcode.editor.en;
 // Related Topics Hash Table String Bit Manipulation Sliding Window Rolling 
 //Hash Hash Function 👍 2341 👎 436
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RepeatedDnaSequences {
@@ -48,19 +47,38 @@ public class RepeatedDnaSequences {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<String> findRepeatedDnaSequences(String s) {
-            HashSet<String> sequence = new HashSet<>();
-            HashSet<String> res = new HashSet<>();
-
-            for (int i = 0; i + 10 <= s.length(); i++) {
-                String substring = s.substring(i, i + 10);
-                if (sequence.contains(substring)) {
-                    res.add(substring);
-                } else {
-                    sequence.add(substring);
+            int[] nums = new int[s.length()];
+            for (int i = 0; i < nums.length; i++) {
+                switch (s.charAt(i)) {
+                    case 'A':
+                        nums[i] = 0;
+                        break;
+                    case 'C':
+                        nums[i] = 1;
+                        break;
+                    case 'G':
+                        nums[i] = 2;
+                        break;
+                    case 'T':
+                        nums[i] = 3;
+                        break;
                 }
             }
-
-            return new ArrayList<>(res);
+            HashSet<Integer> seen = new HashSet<>();
+            HashSet<String> res = new HashSet<>();
+            int left = 0, right = 0, windowHash = 0;
+            while (right < nums.length) {
+                windowHash = 4 * windowHash + nums[right++];
+                if (right - left == 10) {
+                    if (seen.contains(windowHash)) {
+                        res.add(s.substring(left, right));
+                    } else {
+                        seen.add(windowHash);
+                    }
+                    windowHash = windowHash - nums[left++] * (int) Math.pow(4, 9);
+                }
+            }
+            return new LinkedList<>(res);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
