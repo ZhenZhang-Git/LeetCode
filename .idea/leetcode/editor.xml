@@ -157,6 +157,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/CapacityToShipPackagesWithinDDays.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/doc/content/CapacityToShipPackagesWithinDDays.md" />
+              <option name="frontendQuestionId" value="leetcode.com1011" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/CapacityToShipPackagesWithinDDays.java" />
+              <option name="titleSlug" value="capacity-to-ship-packages-within-d-days" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/CarPooling.java">
           <value>
             <LeetcodeEditor>
