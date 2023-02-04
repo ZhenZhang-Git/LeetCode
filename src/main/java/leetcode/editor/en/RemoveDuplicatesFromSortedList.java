@@ -71,11 +71,15 @@ public class RemoveDuplicatesFromSortedList {
 
             while (p != null) {
                 if (p.val == pre.val) {
-                    pre.next = p.next;
+                    p = p.next;
+                    pre.next = null;
                 } else {
+                    ListNode temp = p.next;
+                    p.next = null;
+                    pre.next = p;
                     pre = pre.next;
+                    p = temp;
                 }
-                p = p.next;
             }
 
             return head;
