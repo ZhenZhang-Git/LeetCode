@@ -61,7 +61,7 @@ public class PermutationInString {
                     valid++;
                 }
 
-                while (right - left == s1.length()) {
+                if (right - left == s1.length()) {
                     if (valid == need.size()) {
                         return true;
                     }
