@@ -69,7 +69,7 @@ public class FindAllAnagramsInAString {
                     valid++;
                 }
 
-                while (right - left == p.length()) {
+                if (right - left == p.length()) {
                     if (valid == need.size()) {
                         result.add(left);
                     }
