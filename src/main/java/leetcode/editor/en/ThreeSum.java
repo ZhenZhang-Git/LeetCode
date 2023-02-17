@@ -48,6 +48,7 @@ package leetcode.editor.en;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ThreeSum {
@@ -60,60 +61,31 @@ public class ThreeSum {
     class Solution {
         public List<List<Integer>> threeSum(int[] nums) {
             Arrays.sort(nums);
-
-            return nSum(nums, 3, 0, 0);
+            backtrack(nums, 0);
+            return res;
         }
 
-        public List<List<Integer>> nSum(int[] nums, int n, int start, int target) {
-            Arrays.sort(nums);
-            List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        List<List<Integer>> res = new LinkedList<>();
 
-            if (n < 2 || nums.length < n) {
-                return res;
-            }
-
-            if (n == 2) {
-                int left = start, right = nums.length - 1;
-
-                while (left < right) {
-                    int sum = nums[left] + nums[right];
-                    int leftNum = nums[left], rightNum = nums[right];
-
-                    if (sum == target) {
-                        res.add(new ArrayList<>(Arrays.asList(nums[left], nums[right])));
-
-                        while (left < right && nums[left] == leftNum) {
-                            left++;
-                        }
-                        while (left < right && nums[right] == rightNum) {
-                            right--;
-                        }
-                    } else if (sum < target) {
-                        while (left < right && nums[left] == leftNum) {
-                            left++;
-                        }
-                    } else {
-                        while (left < right && nums[right] == rightNum) {
-                            right--;
-                        }
-                    }
-                }
-            } else {
-                for (int i = start; i < nums.length; i++) {
-                    List<List<Integer>> sub = nSum(nums, n - 1, i + 1, target - nums[i]);
-
-                    for (List<Integer> arr : sub) {
-                        arr.add(nums[i]);
-                        res.add(arr);
-                    }
-
-                    while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
-                        i++;
-                    }
+        void backtrack(int[] nums, int start) {
+            if (track.size() == 3) {
+                if (track.stream().mapToInt(Integer::intValue).sum() == 0) {
+                    res.add(new ArrayList<>(track));
+                    return;
                 }
             }
-
-            return res;
+            for (int i = start; i < nums.length; i++) {
+                if (track.size() > 3) {
+                    continue;
+                }
+                if (i > start && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+                track.addLast(nums[i]);
+                backtrack(nums, i + 1);
+                track.removeLast();
+            }
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
