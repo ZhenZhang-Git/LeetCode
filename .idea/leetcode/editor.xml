@@ -1543,6 +1543,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/TwoSum.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/doc/content/TwoSum.md" />
+              <option name="frontendQuestionId" value="leetcode.com1" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/TwoSum.java" />
+              <option name="titleSlug" value="two-sum" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/TwoSumIiInputArrayIsSorted.java">
           <value>
             <LeetcodeEditor>
@@ -1606,6 +1617,17 @@
               <option name="host" value="leetcode.com" />
               <option name="path" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/ValidateStackSequences.java" />
               <option name="titleSlug" value="validate-stack-sequences" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/[105]Construct Binary Tree from Preorder and Inorder Traversal.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/doc/content/ConstructBinaryTreeFromPreorderAndInorderTraversal.md" />
+              <option name="frontendQuestionId" value="leetcode.com105" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/ConstructBinaryTreeFromPreorderAndInorderTraversal.java" />
+              <option name="titleSlug" value="construct-binary-tree-from-preorder-and-inorder-traversal" />
             </LeetcodeEditor>
           </value>
         </entry>

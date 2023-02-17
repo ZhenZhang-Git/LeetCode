@@ -1,0 +1,40 @@
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    class Solution {
+        HashMap<Integer, Integer> inorderMap = new HashMap<>();
+
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            for (int i = 0; i < inorder.length; i++) {
+                inorderMap.put(inorder[i], i);
+            }
+            if (preorder.length == 0 && inorder.length == 0) {
+                return null;
+            }
+            int rootVal = preorder[0];
+            TreeNode root = new TreeNode(rootVal);
+
+            int rootIndex = inorderMap.get(rootVal);
+
+            root.left = buildTree(Arrays.copyOfRange(preorder, 1, rootIndex + 1), Arrays.copyOfRange(inorder, 0, rootIndex));
+            root.right = buildTree(Arrays.copyOfRange(preorder, rootIndex + 1, preorder.length), Arrays.copyOfRange(inorder, rootIndex + 1, inorder.length));
+
+            return root;
+        }
+    }
+
+//runtime:239 ms
+//memory:140.4 MB
