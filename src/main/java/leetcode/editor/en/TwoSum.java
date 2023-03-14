@@ -2,6 +2,7 @@ package leetcode.editor.en;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 //<p>Given an array of integers <code>nums</code>&nbsp;and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
 //
@@ -58,7 +59,7 @@ public class TwoSum {
             HashMap<Integer, Integer> hashMap = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
                 if (hashMap.containsKey(target - nums[i])) {
-                    return new int[]{hashMap.get(target - nums[i]), i};
+                    return new int[]{i, hashMap.get(target - nums[i])};
                 }
                 hashMap.put(nums[i], i);
             }
@@ -66,5 +67,4 @@ public class TwoSum {
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
-
 } 
