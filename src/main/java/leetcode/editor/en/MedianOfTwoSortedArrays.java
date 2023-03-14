@@ -36,6 +36,10 @@ package leetcode.editor.en;
 //
 // Related Topics Array Binary Search Divide and Conquer 👍 18415 👎 2154
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 public class MedianOfTwoSortedArrays {
     public static void main(String[] args) {
         Solution solution = new MedianOfTwoSortedArrays().new Solution();
@@ -45,7 +49,22 @@ public class MedianOfTwoSortedArrays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-            return 0;
+            ArrayList<Integer> list = new ArrayList<>(Arrays.asList(Arrays.stream(nums1).boxed().toArray(Integer[]::new)));
+            list.addAll(Arrays.asList(Arrays.stream(nums2).boxed().toArray(Integer[]::new)));
+            double res = 0;
+            Collections.sort(list);
+            int sumLength = nums1.length + nums2.length;
+            if (sumLength % 2 != 0) {
+                int mid = sumLength / 2;
+                res = Double.valueOf(list.get(mid));
+            }
+            if (sumLength % 2 == 0) {
+                int mid1 = sumLength / 2 - 1;
+                int mid2 = sumLength / 2;
+                res = (Double.valueOf(list.get(mid1)) + Double.valueOf(list.get(mid2))) / 2;
+            }
+
+            return res;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
