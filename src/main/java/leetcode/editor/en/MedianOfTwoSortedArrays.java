@@ -45,22 +45,32 @@ public class MedianOfTwoSortedArrays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-            int mid = (nums1.length + nums2.length) / 2;
-            int median1 = 0;
-            int median2 = 0;
-            int p1 = 0, p2 = 0;
-            for (int i = 0; i <= mid; i++) {
-                median1 = median2;
-                if (p1 < nums1.length && (p2 >= nums2.length || nums1[p1] < nums2[p2])) {
-                    median2 = nums1[p1++];
-                } else {
-                    median2 = nums2[p2++];
-                }
+            int midIndex1 = (nums1.length + nums2.length) / 2 - 1;
+            int midIndex2 = (nums1.length + nums2.length) / 2;
+            double median = FindKth(nums1, 0, nums2, 0, midIndex2 + 1);
+            if ((nums1.length + nums2.length) % 2 == 0) {
+                median = (median + FindKth(nums1, 0, nums2, 0, midIndex1 + 1)) / 2.0;
             }
-            if (((nums1.length + nums2.length) % 2) == 0) {
-                return (median1 + median2) / 2.0;
+            return median;
+        }
+
+        private int FindKth(int[] nums1, int index1, int[] nums2, int index2, int k) {
+            if (index1 >= nums1.length) {
+                return nums2[index2 + k - 1];
+            }
+            if (index2 >= nums2.length) {
+                return nums1[index1 + k - 1];
+            }
+            if (k == 1) {
+                return Math.min(nums1[index1], nums2[index2]);
+            }
+            int half = k / 2;
+            int newIndex1 = Math.min(index1 + half, nums1.length) - 1;
+            int newIndex2 = Math.min(index2 + half, nums2.length) - 1;
+            if (nums1[newIndex1] <= nums2[newIndex2]) {
+                return FindKth(nums1, newIndex1 + 1, nums2, index2, k - (newIndex1 - index1 + 1));
             } else {
-                return median2;
+                return FindKth(nums1, index1, nums2, newIndex2 + 1, k - (newIndex2 - index2 + 1));
             }
         }
     }
