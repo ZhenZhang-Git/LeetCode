@@ -36,10 +36,6 @@ package leetcode.editor.en;
 //
 // Related Topics Array Binary Search Divide and Conquer 👍 18415 👎 2154
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
 public class MedianOfTwoSortedArrays {
     public static void main(String[] args) {
         Solution solution = new MedianOfTwoSortedArrays().new Solution();
@@ -49,22 +45,23 @@ public class MedianOfTwoSortedArrays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-            ArrayList<Integer> list = new ArrayList<>(Arrays.asList(Arrays.stream(nums1).boxed().toArray(Integer[]::new)));
-            list.addAll(Arrays.asList(Arrays.stream(nums2).boxed().toArray(Integer[]::new)));
-            double res = 0;
-            Collections.sort(list);
-            int sumLength = nums1.length + nums2.length;
-            if (sumLength % 2 != 0) {
-                int mid = sumLength / 2;
-                res = Double.valueOf(list.get(mid));
+            int mid = (nums1.length + nums2.length) / 2;
+            int median1 = 0;
+            int median2 = 0;
+            int p1 = 0, p2 = 0;
+            for (int i = 0; i <= mid; i++) {
+                median1 = median2;
+                if (p1 < nums1.length && (p2 >= nums2.length || nums1[p1] < nums2[p2])) {
+                    median2 = nums1[p1++];
+                } else {
+                    median2 = nums2[p2++];
+                }
             }
-            if (sumLength % 2 == 0) {
-                int mid1 = sumLength / 2 - 1;
-                int mid2 = sumLength / 2;
-                res = (Double.valueOf(list.get(mid1)) + Double.valueOf(list.get(mid2))) / 2;
+            if (((nums1.length + nums2.length) % 2) == 0) {
+                return (median1 + median2) / 2.0;
+            } else {
+                return median2;
             }
-
-            return res;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
