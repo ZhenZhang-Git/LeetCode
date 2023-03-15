@@ -31,28 +31,43 @@ package leetcode.editor.en;
 public class LongestPalindromicSubstring {
     public static void main(String[] args) {
         Solution solution = new LongestPalindromicSubstring().new Solution();
-        solution.longestPalindrome("babad");
+        solution.longestPalindrome("aaaa");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String longestPalindrome(String s) {
-            int n = s.length();
-            String res = null;
-            if (n == 0) {
-                return "";
+            if (s.length() < 2) {
+                return s;
             }
-            boolean[][] dp = new boolean[n][n];
-            for (int i = n - 1; i >= 0; i--) {
-                for (int j = i; j < n; j++) {
-                    dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 3 || dp[i + 1][j - 1]);
-
-                    if (dp[i][j] && (res == null || j - i + 1 > res.length())) {
-                        res = s.substring(i, j + 1);
+            int maxLength = 1, maxi = 0;
+            boolean[][] dp = new boolean[s.length()][s.length()];
+            for (int i = 0; i < s.length(); i++) {
+                dp[i][i] = true;
+            }
+            for (int length = 2; length <= s.length(); length++) {
+                for (int i = 0; i < s.length(); i++) {
+                    int j = i + length - 1;
+                    if (j >= s.length()) {
+                        break;
+                    }
+                    if (s.charAt(i) != s.charAt(j)) {
+                        dp[i][j] = false;
+                    } else {
+                        if (length <= 3) {
+                            dp[i][j] = true;
+                        } else {
+                            dp[i][j] = dp[i + 1][j - 1];
+                        }
+                    }
+                    if (dp[i][j] && j - i + 1 > maxLength) {
+                        maxLength = j - i + 1;
+                        maxi = i;
                     }
                 }
             }
-            return res;
+
+            return s.substring(maxi, maxi + maxLength);
         }
     }
 
