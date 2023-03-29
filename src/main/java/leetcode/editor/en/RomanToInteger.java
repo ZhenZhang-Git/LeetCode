@@ -79,38 +79,12 @@ public class RomanToInteger {
             map.put('D', 500);
             map.put('M', 1000);
 
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) == 'I' && i + 1 < s.length() && s.charAt(i + 1) == 'V') {
-                    sum += 4;
-                    i++;
-                    continue;
-                }
-                if (s.charAt(i) == 'I' && i + 1 < s.length() && s.charAt(i + 1) == 'X') {
-                    sum += 9;
-                    i++;
-                    continue;
-                }
-                if (s.charAt(i) == 'X' && i + 1 < s.length() && s.charAt(i + 1) == 'L') {
-                    sum += 40;
-                    i++;
-                    continue;
-                }
-                if (s.charAt(i) == 'X' && i + 1 < s.length() && s.charAt(i + 1) == 'C') {
-                    sum += 90;
-                    i++;
-                    continue;
-                }
-                if (s.charAt(i) == 'C' && i + 1 < s.length() && s.charAt(i + 1) == 'D') {
-                    sum += 400;
-                    i++;
-                    continue;
-                }
-                if (s.charAt(i) == 'C' && i + 1 < s.length() && s.charAt(i + 1) == 'M') {
-                    sum += 900;
-                    i++;
-                    continue;
-                }
+            for (int i = s.length() - 1; i >= 0; i--) {
                 sum += map.get(s.charAt(i));
+                if (i - 1 >= 0 && map.get(s.charAt(i)) > map.get(s.charAt(i - 1))) {
+                    sum -= map.get(s.charAt(i - 1));
+                    i--;
+                }
             }
 
             return sum;
