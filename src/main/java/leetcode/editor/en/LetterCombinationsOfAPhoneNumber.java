@@ -40,42 +40,43 @@ package leetcode.editor.en;
 // Related Topics Hash Table String Backtracking 👍 11915 👎 735
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LetterCombinationsOfAPhoneNumber {
     public static void main(String[] args) {
         Solution solution = new LetterCombinationsOfAPhoneNumber().new Solution();
-
+        solution.letterCombinations("23");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<String> letterCombinations(String digits) {
-            String[] digitLettersArray = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
             List<String> result = new ArrayList<>();
+            StringBuilder track = new StringBuilder();
 
             if (digits.isEmpty()) {
                 return result;
             }
 
-            result.add("");
-
-            for (int i = 0; i < digits.length(); i++) {
-                result = combine(result, digitLettersArray[digits.charAt(i) - '0']);
-            }
+            backTracking(result,track,digits);
 
             return result;
         }
 
-        private List<String> combine(List<String> stringList, String digitString) {
-            List<String> combineList = new ArrayList<>();
-
-            for (int i = 0; i < digitString.length(); i++) {
-                for (String s : stringList) {
-                    combineList.add(s + digitString.charAt(i));
-                }
+        private void backTracking(List<String> result,StringBuilder track,String digits) {
+            String[] digitLettersArray = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+            if (track.length() == digits.length()) {
+                result.add(track.toString());
+                return;
             }
-            return combineList;
+
+            String digitString = digitLettersArray[Character.getNumericValue(digits.charAt(track.length()))];
+            for (int i = 0; i < digitString.length(); i++) {
+                track.append(digitString.charAt(i));
+                backTracking(result,track,digits);
+                track.deleteCharAt(track.length() - 1);
+            }
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

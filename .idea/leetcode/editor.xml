@@ -1598,6 +1598,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/TwoSumLessThanK.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/doc/content/TwoSumLessThanK.md" />
+              <option name="frontendQuestionId" value="leetcode.com1099" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/leetcode/editor/en/TwoSumLessThanK.java" />
+              <option name="titleSlug" value="two-sum-less-than-k" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/leetcode/editor/en/UniqueBinarySearchTrees.java">
           <value>
             <LeetcodeEditor>
